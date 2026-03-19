@@ -39,7 +39,7 @@ export default function UsersPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <h1 className="font-display text-2xl font-semibold text-dark-800">Gestão de Usuários</h1>
         <button onClick={() => { setFormData({}); setShowCreateModal(true); }} className="btn-primary flex items-center gap-2">
           <Plus size={18} /> Novo Usuário

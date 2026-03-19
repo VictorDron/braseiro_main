@@ -72,7 +72,7 @@ export default function ProcurementPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <h1 className="font-display text-2xl font-semibold text-dark-800">Gestão de Compras</h1>
         {activeTab === 'requests' && (
           <button onClick={() => { setFormData({}); setItems([{ description: '', quantity: 1, unit: 'UN', estimatedUnitPrice: 0 }]); setShowCreateModal(true); }} className="btn-primary flex items-center gap-2">
@@ -87,7 +87,7 @@ export default function ProcurementPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-dark-100 p-1 rounded-lg w-fit">
+      <div className="flex gap-1 bg-dark-100 p-1 rounded-lg w-fit overflow-x-auto flex-nowrap">
         {tabs.map((tab) => (
           <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-white text-dark-800 shadow-sm' : 'text-dark-500 hover:text-dark-800'}`}>
             <tab.icon size={16} /> {tab.label}

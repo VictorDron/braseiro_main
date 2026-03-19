@@ -1,24 +1,34 @@
 import { useState } from 'react';
 import { useAuthStore } from '../../stores/authStore';
-import { Search, Bell } from 'lucide-react';
+import { Menu, Search, Bell } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeaderProps {
   onMenuClick: () => void;
+  isMobile?: boolean;
 }
 
-export default function Header({ onMenuClick }: HeaderProps) {
+export default function Header({ onMenuClick, isMobile }: HeaderProps) {
   const { user } = useAuthStore();
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="h-14 bg-white border-b border-dark-200 flex items-center justify-between px-6 flex-shrink-0">
-      <div className="flex items-center gap-3">
+    <header className="h-14 bg-white border-b border-dark-200 flex items-center justify-between px-4 sm:px-6 flex-shrink-0">
+      <div className="flex items-center gap-2">
+        {isMobile && (
+          <button
+            onClick={onMenuClick}
+            className="p-2 rounded-lg hover:bg-dark-100 transition-colors text-dark-500"
+          >
+            <Menu size={20} />
+          </button>
+        )}
+
         <AnimatePresence>
           {searchOpen ? (
             <motion.div
               initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 280, opacity: 1 }}
+              animate={{ width: isMobile ? 180 : 280, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               className="relative"
             >

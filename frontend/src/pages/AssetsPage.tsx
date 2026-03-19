@@ -102,7 +102,7 @@ export default function AssetsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <h1 className="font-display text-2xl font-semibold text-dark-800">Gestão de Patrimônio</h1>
         {isAdmin && activeTab === 'assets' && (
           <button onClick={() => { setFormData({}); setShowCreateModal(true); }} className="btn-primary flex items-center gap-2">
@@ -117,7 +117,7 @@ export default function AssetsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-dark-100 p-1 rounded-lg w-fit">
+      <div className="flex gap-1 bg-dark-100 p-1 rounded-lg w-fit overflow-x-auto flex-nowrap">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -134,7 +134,7 @@ export default function AssetsPage() {
 
       {/* Dashboard Tab */}
       {activeTab === 'dashboard' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {[
             { label: 'Total', value: stats?.total || 0, color: 'text-dark-800' },
             { label: 'Disponíveis', value: stats?.available || 0, color: 'text-green-600' },
