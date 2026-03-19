@@ -73,7 +73,7 @@ export default function ProcurementPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Gestão de Compras</h1>
+        <h1 className="font-display text-2xl font-semibold text-dark-800">Gestão de Compras</h1>
         {activeTab === 'requests' && (
           <button onClick={() => { setFormData({}); setItems([{ description: '', quantity: 1, unit: 'UN', estimatedUnitPrice: 0 }]); setShowCreateModal(true); }} className="btn-primary flex items-center gap-2">
             <Plus size={18} /> Nova Requisição
@@ -87,9 +87,9 @@ export default function ProcurementPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 p-1 rounded-lg w-fit">
+      <div className="flex gap-1 bg-dark-100 p-1 rounded-lg w-fit">
         {tabs.map((tab) => (
-          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}>
+          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-white text-dark-800 shadow-sm' : 'text-dark-500 hover:text-dark-800'}`}>
             <tab.icon size={16} /> {tab.label}
           </button>
         ))}
@@ -107,8 +107,8 @@ export default function ProcurementPage() {
             <motion.div key={stat.label} className="card p-5" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">{stat.label}</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
+                  <p className="text-sm text-dark-400">{stat.label}</p>
+                  <p className="text-2xl font-bold text-dark-800 mt-1">{stat.value}</p>
                 </div>
                 <div className={`w-10 h-10 ${stat.color} rounded-lg flex items-center justify-center`}>
                   <stat.icon size={20} className="text-white" />
@@ -122,9 +122,9 @@ export default function ProcurementPage() {
       {/* Requests Tab */}
       {activeTab === 'requests' && (
         <div className="card">
-          <div className="p-4 border-b border-gray-200 flex flex-wrap gap-3">
+          <div className="p-4 border-b border-dark-200 flex flex-wrap gap-3">
             <div className="relative flex-1 min-w-[200px]">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-dark-300" />
               <input type="text" placeholder="Buscar requisições..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} className="input-field pl-9 py-2 text-sm" />
             </div>
             <select value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }} className="input-field py-2 text-sm w-44">
@@ -147,27 +147,27 @@ export default function ProcurementPage() {
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-gray-200 bg-gray-50">
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Código</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Título</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Solicitante</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Valor</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Prioridade</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Ações</th>
+                    <tr className="border-b border-dark-200 bg-dark-50">
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Código</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Título</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Solicitante</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Valor</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Prioridade</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Status</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Ações</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-dark-100">
                     {purchasesData.data.map((purchase) => (
-                      <tr key={purchase.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-4 py-3 text-sm font-mono text-brand-600">{purchase.code}</td>
+                      <tr key={purchase.id} className="hover:bg-dark-50 transition-colors">
+                        <td className="px-4 py-3 text-sm font-mono text-primary-600">{purchase.code}</td>
                         <td className="px-4 py-3">
-                          <button onClick={() => { setSelectedPurchase(purchase); setShowDetailModal(true); }} className="text-sm font-medium text-gray-900 hover:text-brand-600 text-left">
+                          <button onClick={() => { setSelectedPurchase(purchase); setShowDetailModal(true); }} className="text-sm font-medium text-dark-800 hover:text-primary-600 text-left">
                             {purchase.title}
                           </button>
-                          <p className="text-xs text-gray-500">{purchase.items?.length} {purchase.items?.length === 1 ? 'item' : 'itens'}</p>
+                          <p className="text-xs text-dark-400">{purchase.items?.length} {purchase.items?.length === 1 ? 'item' : 'itens'}</p>
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-600">{purchase.createdBy?.name}</td>
+                        <td className="px-4 py-3 text-sm text-dark-500">{purchase.createdBy?.name}</td>
                         <td className="px-4 py-3 text-sm font-medium">R$ {Number(purchase.totalAmount).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
                         <td className="px-4 py-3"><StatusBadge status={purchase.priority} /></td>
                         <td className="px-4 py-3"><StatusBadge status={purchase.status} /></td>
@@ -207,23 +207,23 @@ export default function ProcurementPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200 bg-gray-50">
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nome</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Email</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Telefone</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Documento</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Pedidos</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Ações</th>
+                <tr className="border-b border-dark-200 bg-dark-50">
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Nome</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Email</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Telefone</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Documento</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Pedidos</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-dark-100">
                 {suppliersData?.data.map((supplier) => (
-                  <tr key={supplier.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900">{supplier.name}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{supplier.email || '-'}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{supplier.phone || '-'}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{supplier.document || '-'}</td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{supplier._count?.purchaseOrders || 0}</td>
+                  <tr key={supplier.id} className="hover:bg-dark-50 transition-colors">
+                    <td className="px-4 py-3 text-sm font-medium text-dark-800">{supplier.name}</td>
+                    <td className="px-4 py-3 text-sm text-dark-500">{supplier.email || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-dark-500">{supplier.phone || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-dark-500">{supplier.document || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-dark-500">{supplier._count?.purchaseOrders || 0}</td>
                     <td className="px-4 py-3">
                       {isAdmin && (
                         <button onClick={() => archiveSupplier.mutate(supplier.id)} className="text-xs text-red-500 hover:text-red-700">Arquivar</button>
@@ -243,15 +243,15 @@ export default function ProcurementPage() {
         <form onSubmit={handleCreatePurchase} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Título *</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Título *</label>
               <input type="text" required className="input-field" value={formData.title || ''} onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Departamento</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Departamento</label>
               <input type="text" className="input-field" value={formData.department || ''} onChange={(e) => setFormData({ ...formData, department: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Prioridade</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Prioridade</label>
               <select className="input-field" value={formData.priority || 'NORMAL'} onChange={(e) => setFormData({ ...formData, priority: e.target.value })}>
                 <option value="LOW">Baixa</option>
                 <option value="NORMAL">Normal</option>
@@ -261,15 +261,15 @@ export default function ProcurementPage() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Justificativa *</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Justificativa *</label>
             <textarea required className="input-field" rows={2} value={formData.justification || ''} onChange={(e) => setFormData({ ...formData, justification: e.target.value })} />
           </div>
 
           {/* Items */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm font-medium text-gray-700">Itens</label>
-              <button type="button" onClick={addItem} className="text-xs text-brand-600 hover:text-brand-700 font-medium">+ Adicionar Item</button>
+              <label className="text-sm font-medium text-dark-700">Itens</label>
+              <button type="button" onClick={addItem} className="text-xs text-primary-600 hover:text-primary-700 font-medium">+ Adicionar Item</button>
             </div>
             <div className="space-y-3">
               {items.map((item, i) => (
@@ -303,33 +303,33 @@ export default function ProcurementPage() {
         {selectedPurchase && (
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div><p className="text-xs text-gray-500">Status</p><StatusBadge status={selectedPurchase.status} size="md" /></div>
-              <div><p className="text-xs text-gray-500">Prioridade</p><StatusBadge status={selectedPurchase.priority} size="md" /></div>
-              <div><p className="text-xs text-gray-500">Solicitante</p><p className="text-sm font-medium">{selectedPurchase.createdBy?.name}</p></div>
-              <div><p className="text-xs text-gray-500">Valor Total</p><p className="text-sm font-semibold">R$ {Number(selectedPurchase.totalAmount).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p></div>
+              <div><p className="text-xs text-dark-400">Status</p><StatusBadge status={selectedPurchase.status} size="md" /></div>
+              <div><p className="text-xs text-dark-400">Prioridade</p><StatusBadge status={selectedPurchase.priority} size="md" /></div>
+              <div><p className="text-xs text-dark-400">Solicitante</p><p className="text-sm font-medium">{selectedPurchase.createdBy?.name}</p></div>
+              <div><p className="text-xs text-dark-400">Valor Total</p><p className="text-sm font-semibold">R$ {Number(selectedPurchase.totalAmount).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p></div>
             </div>
-            <div><p className="text-xs text-gray-500 mb-1">Justificativa</p><p className="text-sm text-gray-700">{selectedPurchase.justification}</p></div>
+            <div><p className="text-xs text-dark-400 mb-1">Justificativa</p><p className="text-sm text-dark-700">{selectedPurchase.justification}</p></div>
             <div>
-              <p className="text-xs text-gray-500 mb-2">Itens ({selectedPurchase.items?.length})</p>
+              <p className="text-xs text-dark-400 mb-2">Itens ({selectedPurchase.items?.length})</p>
               <div className="border rounded-lg divide-y">
                 {selectedPurchase.items?.map((item) => (
                   <div key={item.id} className="px-4 py-2 flex justify-between text-sm">
                     <span>{item.description}</span>
-                    <span className="text-gray-500">{item.quantity} {item.unit} x R$ {Number(item.estimatedUnitPrice).toFixed(2)} = <strong>R$ {Number(item.totalPrice).toFixed(2)}</strong></span>
+                    <span className="text-dark-400">{item.quantity} {item.unit} x R$ {Number(item.estimatedUnitPrice).toFixed(2)} = <strong>R$ {Number(item.totalPrice).toFixed(2)}</strong></span>
                   </div>
                 ))}
               </div>
             </div>
             {selectedPurchase.approvalActions && selectedPurchase.approvalActions.length > 0 && (
               <div>
-                <p className="text-xs text-gray-500 mb-2">Histórico</p>
+                <p className="text-xs text-dark-400 mb-2">Histórico</p>
                 <div className="space-y-2">
                   {selectedPurchase.approvalActions.map((action) => (
                     <div key={action.id} className="flex items-center gap-2 text-sm">
                       <StatusBadge status={action.newStatus} />
-                      <span className="text-gray-600">por {action.user?.name}</span>
-                      <span className="text-gray-400 text-xs">{format(new Date(action.createdAt), 'dd/MM/yyyy HH:mm')}</span>
-                      {action.comments && <span className="text-gray-500 italic">- {action.comments}</span>}
+                      <span className="text-dark-500">por {action.user?.name}</span>
+                      <span className="text-dark-300 text-xs">{format(new Date(action.createdAt), 'dd/MM/yyyy HH:mm')}</span>
+                      {action.comments && <span className="text-dark-400 italic">- {action.comments}</span>}
                     </div>
                   ))}
                 </div>
@@ -344,23 +344,23 @@ export default function ProcurementPage() {
         <form onSubmit={(e) => { e.preventDefault(); executePurchase.mutate({ id: selectedPurchase!.id, ...formData }, { onSuccess: () => { setShowExecuteModal(false); setFormData({}); } }); }} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Fornecedor</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Fornecedor</label>
               <select className="input-field" value={formData.supplierId || ''} onChange={(e) => setFormData({ ...formData, supplierId: e.target.value || undefined })}>
                 <option value="">Selecione...</option>
                 {suppliersData?.data.map((s) => (<option key={s.id} value={s.id}>{s.name}</option>))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Nº Nota Fiscal</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Nº Nota Fiscal</label>
               <input type="text" className="input-field" value={formData.invoiceNumber || ''} onChange={(e) => setFormData({ ...formData, invoiceNumber: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Valor Total</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Valor Total</label>
               <input type="number" step="0.01" className="input-field" value={formData.totalAmount || ''} onChange={(e) => setFormData({ ...formData, totalAmount: parseFloat(e.target.value) || undefined })} />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Observações</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Observações</label>
             <textarea className="input-field" rows={2} value={formData.notes || ''} onChange={(e) => setFormData({ ...formData, notes: e.target.value })} />
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t">
@@ -374,25 +374,25 @@ export default function ProcurementPage() {
       <Modal isOpen={showCreateSupplierModal} onClose={() => setShowCreateSupplierModal(false)} title="Novo Fornecedor">
         <form onSubmit={(e) => { e.preventDefault(); createSupplier.mutate(formData, { onSuccess: () => { setShowCreateSupplierModal(false); setFormData({}); } }); }} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Nome *</label>
             <input type="text" required className="input-field" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Email</label>
               <input type="email" className="input-field" value={formData.email || ''} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Telefone</label>
               <input type="text" className="input-field" value={formData.phone || ''} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">CNPJ/CPF</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">CNPJ/CPF</label>
             <input type="text" className="input-field" value={formData.document || ''} onChange={(e) => setFormData({ ...formData, document: e.target.value })} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Endereço</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Endereço</label>
             <input type="text" className="input-field" value={formData.address || ''} onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t">

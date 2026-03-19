@@ -103,7 +103,7 @@ export default function AssetsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Gestão de Patrimônio</h1>
+        <h1 className="font-display text-2xl font-semibold text-dark-800">Gestão de Patrimônio</h1>
         {isAdmin && activeTab === 'assets' && (
           <button onClick={() => { setFormData({}); setShowCreateModal(true); }} className="btn-primary flex items-center gap-2">
             <Plus size={18} /> Novo Ativo
@@ -117,13 +117,13 @@ export default function AssetsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 p-1 rounded-lg w-fit">
+      <div className="flex gap-1 bg-dark-100 p-1 rounded-lg w-fit">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-              activeTab === tab.id ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+              activeTab === tab.id ? 'bg-white text-dark-800 shadow-sm' : 'text-dark-500 hover:text-dark-800'
             }`}
           >
             <tab.icon size={16} />
@@ -136,14 +136,14 @@ export default function AssetsPage() {
       {activeTab === 'dashboard' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {[
-            { label: 'Total', value: stats?.total || 0, color: 'text-gray-900' },
+            { label: 'Total', value: stats?.total || 0, color: 'text-dark-800' },
             { label: 'Disponíveis', value: stats?.available || 0, color: 'text-green-600' },
             { label: 'Em Uso', value: stats?.inUse || 0, color: 'text-blue-600' },
             { label: 'Manutenção', value: stats?.maintenance || 0, color: 'text-yellow-600' },
-            { label: 'Desativados', value: stats?.decommissioned || 0, color: 'text-gray-500' },
+            { label: 'Desativados', value: stats?.decommissioned || 0, color: 'text-dark-400' },
           ].map((stat, i) => (
             <motion.div key={stat.label} className="card p-5" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
-              <p className="text-sm text-gray-500">{stat.label}</p>
+              <p className="text-sm text-dark-400">{stat.label}</p>
               <p className={`text-3xl font-bold mt-1 ${stat.color}`}>{stat.value}</p>
             </motion.div>
           ))}
@@ -154,9 +154,9 @@ export default function AssetsPage() {
       {activeTab === 'assets' && (
         <div className="card">
           {/* Filters */}
-          <div className="p-4 border-b border-gray-200 flex flex-wrap gap-3">
+          <div className="p-4 border-b border-dark-200 flex flex-wrap gap-3">
             <div className="relative flex-1 min-w-[200px]">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-dark-300" />
               <input
                 type="text"
                 placeholder="Buscar ativos..."
@@ -190,45 +190,45 @@ export default function AssetsPage() {
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-gray-200 bg-gray-50">
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Código</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nome</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Categoria</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Localização</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Responsável</th>
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Ações</th>
+                    <tr className="border-b border-dark-200 bg-dark-50">
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Código</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Nome</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Categoria</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Localização</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Status</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Responsável</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-dark-400 uppercase">Ações</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-dark-100">
                     {assetsData.data.map((asset) => (
-                      <tr key={asset.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-4 py-3 text-sm font-mono text-brand-600">{asset.code}</td>
+                      <tr key={asset.id} className="hover:bg-dark-50 transition-colors">
+                        <td className="px-4 py-3 text-sm font-mono text-primary-600">{asset.code}</td>
                         <td className="px-4 py-3">
-                          <p className="text-sm font-medium text-gray-900">{asset.name}</p>
-                          {asset.brand && <p className="text-xs text-gray-500">{asset.brand} {asset.model}</p>}
+                          <p className="text-sm font-medium text-dark-800">{asset.name}</p>
+                          {asset.brand && <p className="text-xs text-dark-400">{asset.brand} {asset.model}</p>}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-600">
+                        <td className="px-4 py-3 text-sm text-dark-500">
                           {asset.category?.icon} {asset.category?.name}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-600">
+                        <td className="px-4 py-3 text-sm text-dark-500">
                           <span className="flex items-center gap-1"><MapPin size={12} /> {asset.location?.name}</span>
                         </td>
                         <td className="px-4 py-3"><StatusBadge status={asset.status} /></td>
-                        <td className="px-4 py-3 text-sm text-gray-600">{asset.responsible?.name || '-'}</td>
+                        <td className="px-4 py-3 text-sm text-dark-500">{asset.responsible?.name || '-'}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1">
-                            <button onClick={() => { setSelectedAsset(asset); setFormData({}); setShowMoveModal(true); }} className="p-1.5 rounded hover:bg-gray-100 text-gray-500" title="Mover">
+                            <button onClick={() => { setSelectedAsset(asset); setFormData({}); setShowMoveModal(true); }} className="p-1.5 rounded hover:bg-dark-100 text-dark-400" title="Mover">
                               <MoveRight size={14} />
                             </button>
-                            <button onClick={() => { setSelectedAsset(asset); setFormData({ responsibleId: asset.responsibleId }); setShowAssignModal(true); }} className="p-1.5 rounded hover:bg-gray-100 text-gray-500" title="Atribuir">
+                            <button onClick={() => { setSelectedAsset(asset); setFormData({ responsibleId: asset.responsibleId }); setShowAssignModal(true); }} className="p-1.5 rounded hover:bg-dark-100 text-dark-400" title="Atribuir">
                               <UserCheck size={14} />
                             </button>
-                            <button onClick={() => { setSelectedAsset(asset); setFormData({}); setShowMaintenanceModal(true); }} className="p-1.5 rounded hover:bg-gray-100 text-gray-500" title="Manutenção">
+                            <button onClick={() => { setSelectedAsset(asset); setFormData({}); setShowMaintenanceModal(true); }} className="p-1.5 rounded hover:bg-dark-100 text-dark-400" title="Manutenção">
                               <Wrench size={14} />
                             </button>
                             {isAdmin && asset.status !== 'DECOMMISSIONED' && (
-                              <button onClick={() => { if (confirm('Deseja desativar este ativo?')) decommissionAsset.mutate({ id: asset.id }); }} className="p-1.5 rounded hover:bg-red-50 text-gray-500 hover:text-red-600" title="Desativar">
+                              <button onClick={() => { if (confirm('Deseja desativar este ativo?')) decommissionAsset.mutate({ id: asset.id }); }} className="p-1.5 rounded hover:bg-red-50 text-dark-400 hover:text-red-600" title="Desativar">
                                 <XCircle size={14} />
                               </button>
                             )}
@@ -250,15 +250,15 @@ export default function AssetsPage() {
         <div className="space-y-6">
           {(overdueMaintenance?.length || 0) > 0 && (
             <div className="card">
-              <div className="px-6 py-4 border-b border-gray-200 bg-red-50">
+              <div className="px-6 py-4 border-b border-dark-200 bg-red-50">
                 <h3 className="font-semibold text-red-800">Manutenções Atrasadas ({overdueMaintenance?.length})</h3>
               </div>
-              <div className="divide-y divide-gray-100">
+              <div className="divide-y divide-dark-100">
                 {overdueMaintenance?.map((m) => (
                   <div key={m.id} className="px-6 py-4 flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium">{m.asset?.name} - {m.description}</p>
-                      <p className="text-xs text-gray-500">Agendado: {format(new Date(m.scheduledDate), 'dd/MM/yyyy')} | Tipo: {m.type}</p>
+                      <p className="text-xs text-dark-400">Agendado: {format(new Date(m.scheduledDate), 'dd/MM/yyyy')} | Tipo: {m.type}</p>
                     </div>
                     <button onClick={() => completeMaintenance.mutate({ assetId: m.assetId, maintenanceId: m.id })} className="btn-primary text-xs py-1.5">
                       Concluir
@@ -269,18 +269,18 @@ export default function AssetsPage() {
             </div>
           )}
           <div className="card">
-            <div className="px-6 py-4 border-b border-gray-200">
+            <div className="px-6 py-4 border-b border-dark-200">
               <h3 className="font-semibold">Próximas Manutenções ({upcomingMaintenance?.length || 0})</h3>
             </div>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y divide-dark-100">
               {!upcomingMaintenance?.length ? (
-                <div className="px-6 py-8 text-center text-gray-500 text-sm">Nenhuma manutenção agendada</div>
+                <div className="px-6 py-8 text-center text-dark-400 text-sm">Nenhuma manutenção agendada</div>
               ) : (
                 upcomingMaintenance.map((m) => (
                   <div key={m.id} className="px-6 py-4 flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium">{m.asset?.name} - {m.description}</p>
-                      <p className="text-xs text-gray-500">Agendado: {format(new Date(m.scheduledDate), 'dd/MM/yyyy')} | <StatusBadge status={m.status} /></p>
+                      <p className="text-xs text-dark-400">Agendado: {format(new Date(m.scheduledDate), 'dd/MM/yyyy')} | <StatusBadge status={m.status} /></p>
                     </div>
                     {m.status !== 'COMPLETED' && (
                       <button onClick={() => completeMaintenance.mutate({ assetId: m.assetId, maintenanceId: m.id })} className="btn-secondary text-xs py-1.5">
@@ -298,18 +298,18 @@ export default function AssetsPage() {
       {/* Inventory Tab */}
       {activeTab === 'inventory' && (
         <div className="card">
-          <div className="px-6 py-4 border-b border-gray-200">
+          <div className="px-6 py-4 border-b border-dark-200">
             <h3 className="font-semibold">Sessões de Inventário</h3>
           </div>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-dark-100">
             {!inventorySessions?.length ? (
               <EmptyState icon={<ClipboardList size={24} />} title="Nenhum inventário" description="Crie uma sessão de inventário para verificar seus ativos" />
             ) : (
               inventorySessions.map((session) => (
                 <div key={session.id} className="px-6 py-4 flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium">{session.name} <span className="text-gray-400 font-mono text-xs">({session.code})</span></p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-sm font-medium">{session.name} <span className="text-dark-300 font-mono text-xs">({session.code})</span></p>
+                    <p className="text-xs text-dark-400">
                       Total: {session.totalAssets} | Encontrados: {session.foundCount} | Faltando: {session.missingCount}
                     </p>
                   </div>
@@ -334,17 +334,17 @@ export default function AssetsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Categories */}
           <div className="card">
-            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+            <div className="px-6 py-4 border-b border-dark-200 flex justify-between items-center">
               <h3 className="font-semibold">Categorias</h3>
               <button onClick={() => { setFormData({}); setShowCreateCategoryModal(true); }} className="btn-primary text-xs py-1.5 flex items-center gap-1"><Plus size={14} /> Nova</button>
             </div>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y divide-dark-100">
               {categories?.map((cat) => (
                 <div key={cat.id} className="px-6 py-3 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span>{cat.icon}</span>
                     <span className="text-sm font-medium">{cat.name}</span>
-                    <span className="text-xs text-gray-400">({cat._count?.assets || 0})</span>
+                    <span className="text-xs text-dark-300">({cat._count?.assets || 0})</span>
                   </div>
                   {(cat._count?.assets || 0) === 0 && (
                     <button onClick={() => deleteCategory.mutate(cat.id)} className="text-xs text-red-500 hover:text-red-700">Remover</button>
@@ -355,17 +355,17 @@ export default function AssetsPage() {
           </div>
           {/* Locations */}
           <div className="card">
-            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+            <div className="px-6 py-4 border-b border-dark-200 flex justify-between items-center">
               <h3 className="font-semibold">Localizações</h3>
               <button onClick={() => { setFormData({}); setShowCreateLocationModal(true); }} className="btn-primary text-xs py-1.5 flex items-center gap-1"><Plus size={14} /> Nova</button>
             </div>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y divide-dark-100">
               {locations?.map((loc) => (
                 <div key={loc.id} className="px-6 py-3 flex items-center justify-between">
                   <div>
                     <span className="text-sm font-medium">{loc.name}</span>
-                    {loc.description && <span className="text-xs text-gray-400 ml-2">{loc.description}</span>}
-                    <span className="text-xs text-gray-400 ml-2">({loc._count?.assets || 0})</span>
+                    {loc.description && <span className="text-xs text-dark-300 ml-2">{loc.description}</span>}
+                    <span className="text-xs text-dark-300 ml-2">({loc._count?.assets || 0})</span>
                   </div>
                   {(loc._count?.assets || 0) === 0 && (!loc.children || loc.children.length === 0) && (
                     <button onClick={() => deleteLocation.mutate(loc.id)} className="text-xs text-red-500 hover:text-red-700">Remover</button>
@@ -382,46 +382,46 @@ export default function AssetsPage() {
         <form onSubmit={handleCreateAsset} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Nome *</label>
               <input type="text" required className="input-field" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Categoria *</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Categoria *</label>
               <select required className="input-field" value={formData.categoryId || ''} onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}>
                 <option value="">Selecione...</option>
                 {categories?.map((cat) => (<option key={cat.id} value={cat.id}>{cat.icon} {cat.name}</option>))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Localização *</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Localização *</label>
               <select required className="input-field" value={formData.locationId || ''} onChange={(e) => setFormData({ ...formData, locationId: e.target.value })}>
                 <option value="">Selecione...</option>
                 {locations?.map((loc) => (<option key={loc.id} value={loc.id}>{loc.name}</option>))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Marca</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Marca</label>
               <input type="text" className="input-field" value={formData.brand || ''} onChange={(e) => setFormData({ ...formData, brand: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Modelo</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Modelo</label>
               <input type="text" className="input-field" value={formData.model || ''} onChange={(e) => setFormData({ ...formData, model: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Número de Série</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Número de Série</label>
               <input type="text" className="input-field" value={formData.serialNumber || ''} onChange={(e) => setFormData({ ...formData, serialNumber: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Data de Aquisição</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Data de Aquisição</label>
               <input type="date" className="input-field" value={formData.acquisitionDate || ''} onChange={(e) => setFormData({ ...formData, acquisitionDate: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Valor de Aquisição (R$)</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Valor de Aquisição (R$)</label>
               <input type="number" step="0.01" className="input-field" value={formData.acquisitionValue || ''} onChange={(e) => setFormData({ ...formData, acquisitionValue: parseFloat(e.target.value) || undefined })} />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Descrição</label>
             <textarea className="input-field" rows={3} value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t">
@@ -435,18 +435,18 @@ export default function AssetsPage() {
       <Modal isOpen={showMoveModal} onClose={() => setShowMoveModal(false)} title={`Mover: ${selectedAsset?.name || ''}`}>
         <form onSubmit={handleMoveAsset} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Local Atual</label>
-            <input type="text" disabled className="input-field bg-gray-50" value={selectedAsset?.location?.name || ''} />
+            <label className="block text-sm font-medium text-dark-700 mb-1">Local Atual</label>
+            <input type="text" disabled className="input-field bg-dark-50" value={selectedAsset?.location?.name || ''} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Novo Local *</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Novo Local *</label>
             <select required className="input-field" value={formData.toLocationId || ''} onChange={(e) => setFormData({ ...formData, toLocationId: e.target.value })}>
               <option value="">Selecione...</option>
               {locations?.filter((l) => l.id !== selectedAsset?.locationId).map((loc) => (<option key={loc.id} value={loc.id}>{loc.name}</option>))}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Motivo</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Motivo</label>
             <input type="text" className="input-field" value={formData.reason || ''} onChange={(e) => setFormData({ ...formData, reason: e.target.value })} />
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t">
@@ -460,7 +460,7 @@ export default function AssetsPage() {
       <Modal isOpen={showAssignModal} onClose={() => setShowAssignModal(false)} title={`Atribuir: ${selectedAsset?.name || ''}`}>
         <form onSubmit={handleAssignAsset} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Responsável</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Responsável</label>
             <select className="input-field" value={formData.responsibleId || ''} onChange={(e) => setFormData({ ...formData, responsibleId: e.target.value })}>
               <option value="">Sem responsável</option>
               {users?.map((u) => (<option key={u.id} value={u.id}>{u.name} ({u.email})</option>))}
@@ -478,7 +478,7 @@ export default function AssetsPage() {
         <form onSubmit={handleCreateMaintenance} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tipo *</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Tipo *</label>
               <select required className="input-field" value={formData.type || ''} onChange={(e) => setFormData({ ...formData, type: e.target.value })}>
                 <option value="">Selecione...</option>
                 <option value="PREVENTIVE">Preventiva</option>
@@ -489,21 +489,21 @@ export default function AssetsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Data Agendada *</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Data Agendada *</label>
               <input type="date" required className="input-field" value={formData.scheduledDate || ''} onChange={(e) => setFormData({ ...formData, scheduledDate: e.target.value })} />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descrição *</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Descrição *</label>
             <textarea required className="input-field" rows={3} value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Fornecedor/Prestador</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Fornecedor/Prestador</label>
               <input type="text" className="input-field" value={formData.vendor || ''} onChange={(e) => setFormData({ ...formData, vendor: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Custo Estimado (R$)</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Custo Estimado (R$)</label>
               <input type="number" step="0.01" className="input-field" value={formData.cost || ''} onChange={(e) => setFormData({ ...formData, cost: parseFloat(e.target.value) || undefined })} />
             </div>
           </div>
@@ -518,20 +518,20 @@ export default function AssetsPage() {
       <Modal isOpen={showCreateCategoryModal} onClose={() => setShowCreateCategoryModal(false)} title="Nova Categoria">
         <form onSubmit={(e) => { e.preventDefault(); createCategory.mutate(formData, { onSuccess: () => { setShowCreateCategoryModal(false); setFormData({}); } }); }} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Nome *</label>
             <input type="text" required className="input-field" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Descrição</label>
             <input type="text" className="input-field" value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Ícone (emoji)</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Ícone (emoji)</label>
               <input type="text" className="input-field" value={formData.icon || ''} onChange={(e) => setFormData({ ...formData, icon: e.target.value })} placeholder="Ex: 💻" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cor</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Cor</label>
               <input type="color" className="input-field h-10" value={formData.color || '#3B82F6'} onChange={(e) => setFormData({ ...formData, color: e.target.value })} />
             </div>
           </div>
@@ -546,15 +546,15 @@ export default function AssetsPage() {
       <Modal isOpen={showCreateLocationModal} onClose={() => setShowCreateLocationModal(false)} title="Nova Localização">
         <form onSubmit={(e) => { e.preventDefault(); createLocation.mutate(formData, { onSuccess: () => { setShowCreateLocationModal(false); setFormData({}); } }); }} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Nome *</label>
             <input type="text" required className="input-field" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Descrição</label>
             <input type="text" className="input-field" value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Localização Pai</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Localização Pai</label>
             <select className="input-field" value={formData.parentId || ''} onChange={(e) => setFormData({ ...formData, parentId: e.target.value || undefined })}>
               <option value="">Nenhuma (nível raiz)</option>
               {locations?.map((loc) => (<option key={loc.id} value={loc.id}>{loc.name}</option>))}
@@ -571,23 +571,23 @@ export default function AssetsPage() {
       <Modal isOpen={showCreateInventoryModal} onClose={() => setShowCreateInventoryModal(false)} title="Novo Inventário">
         <form onSubmit={(e) => { e.preventDefault(); createInventory.mutate(formData, { onSuccess: () => { setShowCreateInventoryModal(false); setFormData({}); } }); }} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Nome *</label>
             <input type="text" required className="input-field" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+            <label className="block text-sm font-medium text-dark-700 mb-1">Descrição</label>
             <textarea className="input-field" rows={2} value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Filtrar por Local</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Filtrar por Local</label>
               <select className="input-field" value={formData.locationId || ''} onChange={(e) => setFormData({ ...formData, locationId: e.target.value || undefined })}>
                 <option value="">Todos</option>
                 {locations?.map((loc) => (<option key={loc.id} value={loc.id}>{loc.name}</option>))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Filtrar por Categoria</label>
+              <label className="block text-sm font-medium text-dark-700 mb-1">Filtrar por Categoria</label>
               <select className="input-field" value={formData.categoryId || ''} onChange={(e) => setFormData({ ...formData, categoryId: e.target.value || undefined })}>
                 <option value="">Todas</option>
                 {categories?.map((cat) => (<option key={cat.id} value={cat.id}>{cat.icon} {cat.name}</option>))}

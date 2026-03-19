@@ -6,10 +6,9 @@ import {
   Users,
   Truck,
   CheckCircle,
-  AlertCircle,
   Clock,
   Wrench,
-  TrendingUp,
+  AlertCircle,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
@@ -33,6 +32,9 @@ const actionLabels: Record<string, string> = {
   PURCHASE_REJECTED: 'Requisição rejeitada',
   PURCHASE_EXECUTED: 'Compra executada',
   SUPPLIER_CREATED: 'Fornecedor criado',
+  INVENTORY_CREATED: 'Inventário criado',
+  INVENTORY_STARTED: 'Inventário iniciado',
+  INVENTORY_COMPLETED: 'Inventário concluído',
 };
 
 export default function DashboardPage() {
@@ -48,74 +50,69 @@ export default function DashboardPage() {
   const upcomingMaintenance = data?.upcomingMaintenance || [];
 
   const cards = [
-    { label: 'Total de Ativos', value: stats?.totalAssets || 0, icon: Package, color: 'bg-blue-500', change: '' },
-    { label: 'Disponíveis', value: stats?.availableAssets || 0, icon: CheckCircle, color: 'bg-green-500', change: '' },
-    { label: 'Em Uso', value: stats?.inUseAssets || 0, icon: TrendingUp, color: 'bg-purple-500', change: '' },
-    { label: 'Manutenção', value: stats?.maintenanceAssets || 0, icon: Wrench, color: 'bg-yellow-500', change: '' },
-    { label: 'Compras Pendentes', value: stats?.pendingPurchases || 0, icon: ShoppingCart, color: 'bg-orange-500', change: '' },
-    { label: 'Total de Compras', value: stats?.totalPurchases || 0, icon: ShoppingCart, color: 'bg-indigo-500', change: '' },
-    { label: 'Fornecedores', value: stats?.totalSuppliers || 0, icon: Truck, color: 'bg-teal-500', change: '' },
-    { label: 'Usuários Ativos', value: stats?.totalUsers || 0, icon: Users, color: 'bg-pink-500', change: '' },
+    { label: 'Total de Ativos', value: stats?.totalAssets || 0, icon: Package },
+    { label: 'Disponíveis', value: stats?.availableAssets || 0, icon: CheckCircle },
+    { label: 'Em Uso', value: stats?.inUseAssets || 0, icon: Package },
+    { label: 'Manutenção', value: stats?.maintenanceAssets || 0, icon: Wrench },
+    { label: 'Compras Pendentes', value: stats?.pendingPurchases || 0, icon: ShoppingCart },
+    { label: 'Total Compras', value: stats?.totalPurchases || 0, icon: ShoppingCart },
+    { label: 'Fornecedores', value: stats?.totalSuppliers || 0, icon: Truck },
+    { label: 'Usuários', value: stats?.totalUsers || 0, icon: Users },
   ];
 
   return (
     <div className="space-y-6">
-      {/* Welcome */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">
-          Olá, {user?.name?.split(' ')[0]}!
+        <h1 className="font-display text-2xl font-semibold text-dark-800">
+          Olá, {user?.name?.split(' ')[0]}
         </h1>
-        <p className="text-gray-500 mt-1">
-          Aqui está o resumo do seu sistema
+        <p className="text-dark-400 text-sm mt-0.5">
+          Resumo do seu sistema
         </p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {cards.map((card, index) => (
           <motion.div
             key={card.label}
-            className="card p-5"
-            initial={{ opacity: 0, y: 20 }}
+            className="card p-4"
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
+            transition={{ delay: index * 0.03 }}
           >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm text-gray-500">{card.label}</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{card.value}</p>
-              </div>
-              <div className={`w-10 h-10 ${card.color} rounded-lg flex items-center justify-center`}>
-                <card.icon size={20} className="text-white" />
-              </div>
+            <div className="flex items-center justify-between mb-2">
+              <card.icon size={16} className="text-primary-500" />
             </div>
+            <p className="text-2xl font-semibold text-dark-800">{card.value}</p>
+            <p className="text-xs text-dark-400 mt-0.5">{card.label}</p>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Recent Activity */}
         <div className="card">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Atividade Recente</h2>
+          <div className="px-5 py-3.5 border-b border-dark-200">
+            <h2 className="font-display text-sm font-semibold text-dark-800">Atividade Recente</h2>
           </div>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-dark-100">
             {recentActivity.length === 0 ? (
-              <div className="px-6 py-8 text-center text-gray-500 text-sm">
+              <div className="px-5 py-8 text-center text-dark-400 text-sm">
                 Nenhuma atividade recente
               </div>
             ) : (
               recentActivity.slice(0, 8).map((activity: any) => (
-                <div key={activity.id} className="px-6 py-3 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                    <Clock size={14} className="text-gray-500" />
+                <div key={activity.id} className="px-5 py-2.5 flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-primary-50 flex items-center justify-center flex-shrink-0">
+                    <Clock size={12} className="text-primary-600" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900 truncate">
+                    <p className="text-sm text-dark-700 truncate">
                       <span className="font-medium">{activity.user?.name}</span>{' '}
-                      {actionLabels[activity.action] || activity.action}
+                      <span className="text-dark-400">{actionLabels[activity.action] || activity.action}</span>
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-[11px] text-dark-400">
                       {format(new Date(activity.createdAt), "dd 'de' MMM, HH:mm", { locale: ptBR })}
                     </p>
                   </div>
@@ -127,25 +124,25 @@ export default function DashboardPage() {
 
         {/* Upcoming Maintenance */}
         <div className="card">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Manutenções Próximas</h2>
+          <div className="px-5 py-3.5 border-b border-dark-200">
+            <h2 className="font-display text-sm font-semibold text-dark-800">Manutenções Próximas</h2>
           </div>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-dark-100">
             {upcomingMaintenance.length === 0 ? (
-              <div className="px-6 py-8 text-center text-gray-500 text-sm">
+              <div className="px-5 py-8 text-center text-dark-400 text-sm">
                 Nenhuma manutenção agendada
               </div>
             ) : (
               upcomingMaintenance.map((m: any) => (
-                <div key={m.id} className="px-6 py-3 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
-                    <AlertCircle size={14} className="text-yellow-600" />
+                <div key={m.id} className="px-5 py-2.5 flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
+                    <AlertCircle size={12} className="text-amber-500" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                    <p className="text-sm font-medium text-dark-700 truncate">
                       {m.asset?.name} ({m.asset?.code})
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-[11px] text-dark-400">
                       {m.description} - {format(new Date(m.scheduledDate), "dd/MM/yyyy")}
                     </p>
                   </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLogin } from '../hooks/useAuth';
-import { Flame, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LoginPage() {
@@ -15,46 +15,46 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-dark-50 p-4">
       <motion.div
-        className="w-full max-w-md"
-        initial={{ opacity: 0, y: 30 }}
+        className="w-full max-w-sm"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4 }}
       >
         {/* Logo */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-10">
           <motion.div
-            className="inline-flex items-center justify-center w-16 h-16 bg-brand-600 rounded-2xl mb-4"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', delay: 0.2 }}
+            className="inline-flex items-center justify-center w-14 h-14 bg-primary-500 rounded-2xl mb-4"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', delay: 0.1, damping: 15 }}
           >
-            <Flame size={32} className="text-white" />
+            <span className="text-white font-display font-bold text-xl">B</span>
           </motion.div>
-          <h1 className="text-3xl font-bold text-white">Braseiro</h1>
-          <p className="text-gray-400 mt-1">Sistema de Gestão de Patrimônio</p>
+          <h1 className="font-display text-2xl font-semibold text-dark-800">Braseiro</h1>
+          <p className="text-dark-400 text-sm mt-1">Gestão de Patrimônio</p>
         </div>
 
         {/* Form */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
+        <div className="bg-white rounded-2xl p-7 border border-dark-200 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1.5">
+              <label className="block text-sm font-medium text-dark-600 mb-1.5">
                 Email
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                className="input-field"
                 placeholder="seu@email.com"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1.5">
+              <label className="block text-sm font-medium text-dark-600 mb-1.5">
                 Senha
               </label>
               <div className="relative">
@@ -62,16 +62,16 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all pr-12"
-                  placeholder="••••••••"
+                  className="input-field pr-11"
+                  placeholder="Sua senha"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-dark-400 hover:text-dark-600 transition-colors"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
@@ -79,11 +79,11 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={login.isPending}
-              className="w-full py-3 bg-brand-600 text-white rounded-lg font-semibold hover:bg-brand-700 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+              className="btn-primary w-full flex items-center justify-center gap-2"
             >
               {login.isPending ? (
                 <>
-                  <Loader2 size={18} className="animate-spin" />
+                  <Loader2 size={16} className="animate-spin" />
                   Entrando...
                 </>
               ) : (
@@ -93,8 +93,8 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-gray-600 text-sm mt-6">
-          Braseiro v1.0 - Gestão de Patrimônio & Compras
+        <p className="text-center text-dark-400 text-xs mt-6">
+          Braseiro v1.0
         </p>
       </motion.div>
     </div>

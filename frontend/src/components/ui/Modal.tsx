@@ -47,11 +47,11 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="sticky top-0 bg-white flex items-center justify-between px-6 py-4 border-b border-gray-200 rounded-t-xl z-10">
-              <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+            <div className="sticky top-0 bg-white flex items-center justify-between px-6 py-4 border-b border-dark-200 rounded-t-xl z-10">
+              <h2 className="text-lg font-semibold text-dark-800">{title}</h2>
               <button
                 onClick={onClose}
-                className="p-1 rounded-lg hover:bg-gray-100 transition-colors text-gray-500"
+                className="p-1 rounded-lg hover:bg-dark-100 transition-colors text-dark-400"
               >
                 <X size={20} />
               </button>

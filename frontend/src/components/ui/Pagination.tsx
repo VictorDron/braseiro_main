@@ -10,15 +10,15 @@ export default function Pagination({ page, totalPages, onPageChange }: Paginatio
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200">
-      <p className="text-sm text-gray-500">
+    <div className="flex items-center justify-between px-4 py-3 border-t border-dark-200">
+      <p className="text-sm text-dark-400">
         Página {page} de {totalPages}
       </p>
       <div className="flex gap-1">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="p-1.5 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="p-1.5 rounded-lg hover:bg-dark-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronLeft size={18} />
         </button>
@@ -39,8 +39,8 @@ export default function Pagination({ page, totalPages, onPageChange }: Paginatio
               onClick={() => onPageChange(pageNum)}
               className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
                 pageNum === page
-                  ? 'bg-brand-600 text-white'
-                  : 'hover:bg-gray-100 text-gray-600'
+                  ? 'bg-primary-500 text-white'
+                  : 'hover:bg-dark-100 text-dark-500'
               }`}
             >
               {pageNum}
@@ -50,7 +50,7 @@ export default function Pagination({ page, totalPages, onPageChange }: Paginatio
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="p-1.5 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="p-1.5 rounded-lg hover:bg-dark-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronRight size={18} />
         </button>
