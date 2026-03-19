@@ -17,7 +17,7 @@ const app = express();
 // Security
 app.use(helmet());
 app.use(cors({
-  origin: config.frontendUrl,
+  origin: config.frontendUrl ? config.frontendUrl.split(',').map(u => u.trim()) : '*',
   credentials: true,
 }));
 
